@@ -5,10 +5,18 @@ const Wrapper = styled.footer`
   background-color: #000000;
   height: 500px;
   margin-top: 80px;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const ContentWrap = styled.div`
   padding: 30px 80px;
+
+  @media (max-width: 768px) {
+    padding: 30px 25px;
+  }
 `;
 
 const GridWrap = styled.div`
@@ -16,6 +24,11 @@ const GridWrap = styled.div`
   /* grid-template-columns: repeat(4, 1fr); */
   grid-template-rows: repeat(1, minmax(0, 1fr));
   grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 40px;
+  }
 `;
 const Block = styled.div`
   display: flex;
@@ -86,6 +99,7 @@ const SocialNetworkIcons = styled.div`
   width: 1.5rem;
   height: 1.5rem;
   display: inline-flex;
+  cursor: pointer;
 `;
 
 const Footer = () => {

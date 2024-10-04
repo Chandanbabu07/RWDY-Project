@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   background-color: rgb(232 231 228);
   display: flex;
   flex-direction: column;
-  width: 9rem;
+  width: ${(props) => (props.width ? props.width : "9rem")};
   z-index: 50;
   position: absolute;
   box-sizing: border-box;
@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   opacity: 0;
   transform: translateY(20px);
   text-align: left;
+  right: ${(props) => (props.right ? props.right : "")};
 
   @keyframes fadeIn {
     0% {
@@ -24,6 +25,10 @@ const Wrapper = styled.div`
       opacity: 1;
       transform: translateY(0); /* End at original position */
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 10rem;
   }
 `;
 
@@ -36,6 +41,7 @@ const Option = styled.div`
   padding: 0.75rem 1rem;
   color: inherit;
   text-decoration: inherit;
+  cursor: pointer;
 
   &:hover {
     /* background-color: #e5e7eb;
@@ -44,22 +50,21 @@ const Option = styled.div`
     font-weight: 600;
     transform: translateX(5px);
   }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const CommonHeaderHover = ({ Options, right, width }) => {
   return (
     <>
       <Wrapper
-        style={{ right: right ? right : "", width: width ? width : "9rem" }}
+        // style={{ right: right ? right : "", width: width ? width : "9rem" }}
+        right={right}
+        width={width}
       >
         {Options && Options.map((item, index) => <Option>{item}</Option>)}
-        {/* <Option>SHIRTS</Option>
-        <Option>HOODIES</Option>
-        <Option>TANKS</Option>
-        <Option>SWEATSHIRTS</Option>
-        <Option>KURTAS</Option>
-        <Option>BOMBER-JACKETS</Option>
-        <Option>CO-ORD SETS</Option> */}
       </Wrapper>
     </>
   );

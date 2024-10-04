@@ -16,13 +16,34 @@ const Wrapper = styled.div`
   left: ${(props) => props.left};
   cursor: pointer;
 
+  @media (min-width: 768px) {
+    padding: 10px 20px;
+    font-size: 1rem;
+    right: 62px;
+    top: 466px;
+  }
+
   @media (max-width: 768px) {
-    left: 30px;
-    font-size: 0.85rem;
-    padding: 6px 14px;
+    right: 10px;
+    top: 780px;
+  }
+
+  @media (min-width: 1024px) {
+    right: 57px;
+    top: 544px;
+  }
+
+  @media (min-width: 1280px) {
+    right: 73px;
+    top: 595px;
+  }
+
+  @media (min-width: 1320px) {
+    right: 93px;
+    top: 630px;
   }
 `;
-const CommonButton = ({ value, right, top, left }) => {
+const ShopNowbutton = ({ value, right, top, left }) => {
   return (
     <>
       <Wrapper right={right} top={top} left={left}>
@@ -32,4 +53,4 @@ const CommonButton = ({ value, right, top, left }) => {
   );
 };
 
-export default CommonButton;
+export default ShopNowbutton;

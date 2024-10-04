@@ -15,6 +15,7 @@ const InsideWrap = styled.div`
   padding: 3rem 1.5rem;
   display: flex;
   justify-content: space-between;
+  position: relative;
 `;
 
 const Wrap1 = styled.div`
@@ -22,6 +23,30 @@ const Wrap1 = styled.div`
   display: flex;
   gap: 2.5rem;
   align-items: center;
+  /* display: block; */
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Wrap2 = styled.div`
+  /* padding: 3rem 1.5rem;*/
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  width: 12rem;
+
+  @media (max-width: 768px) {
+    width: 9rem;
+  }
+`;
+
+const MobWrap = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const Option = styled.div`
@@ -30,32 +55,51 @@ const Option = styled.div`
   cursor: pointer;
 `;
 
+const MobOptionsWrap = styled.div`
+  position: absolute;
+  background-color: rgb(229 231 235);
+  width: 100%;
+  height: auto;
+  z-index: 3;
+  top: 95px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem;
+  animation: scrollDown 0.5s ease-in-out forwards;
+
+  @keyframes scrollDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+const MobOptions = styled.div`
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 300;
+`;
+
+const StyledHr = styled.hr`
+  height: 1px; /* Equivalent to h-px */
+  margin: 2px 0; /* Equivalent to my-3 */
+  background-color: #cccccc; /* Equivalent to bg-[#cccccc] */
+  border: none; /* Equivalent to border-0 */
+`;
+
 const OptionWrap = styled.div``;
 
 const Header = () => {
   const [showTopwareOptions, setShowTopwareOptions] = useState(false);
   const [showBottomwareOptions, setShowBottomwareOptions] = useState(false);
   const [showLogoOptions, setShowLogoOptions] = useState(false);
-
-  const handleTopwareOptions = () => {
-    setShowBottomwareOptions(false);
-    setShowLogoOptions(false);
-
-    setShowTopwareOptions(!showTopwareOptions);
-  };
-
-  const handleBottomwareOptions = () => {
-    setShowTopwareOptions(false);
-    setShowLogoOptions(false);
-
-    setShowBottomwareOptions(!showBottomwareOptions);
-  };
-
-  const handleLogoOptions = () => {
-    setShowBottomwareOptions(false);
-    setShowTopwareOptions(false);
-    setShowLogoOptions(!showLogoOptions);
-  };
+  const [showOptionsDropDown, setShowOptionsDropDown] = useState(false);
 
   const TopwareOptions = [
     "TEES",
@@ -78,6 +122,30 @@ const Header = () => {
     "Recruit",
   ];
 
+  const handleTopwareOptions = () => {
+    setShowBottomwareOptions(false);
+    setShowLogoOptions(false);
+
+    setShowTopwareOptions(!showTopwareOptions);
+  };
+
+  const handleBottomwareOptions = () => {
+    setShowTopwareOptions(false);
+    setShowLogoOptions(false);
+
+    setShowBottomwareOptions(!showBottomwareOptions);
+  };
+
+  const handleLogoOptions = () => {
+    setShowBottomwareOptions(false);
+    setShowTopwareOptions(false);
+    setShowLogoOptions(!showLogoOptions);
+  };
+
+  const handleHamburger = () => {
+    setShowOptionsDropDown(!showOptionsDropDown);
+  };
+
   return (
     <>
       <Wrapper>
@@ -98,7 +166,39 @@ const Header = () => {
               )}
             </OptionWrap>
           </Wrap1>
-          <Wrap1 style={{ width: "12rem" }}>
+          <MobWrap onClick={() => handleHamburger()}>
+            {showOptionsDropDown ? (
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                fill-rule="evenodd"
+                height="25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M799.855 166.312c.023.007.043.018.084.059l57.69 57.69c.041.041.052.06.059.084a.118.118 0 0 1 0 .069c-.007.023-.018.042-.059.083L569.926 512l287.703 287.703c.041.04.052.06.059.083a.118.118 0 0 1 0 .07c-.007.022-.018.042-.059.083l-57.69 57.69c-.041.041-.06.052-.084.059a.118.118 0 0 1-.069 0c-.023-.007-.042-.018-.083-.059L512 569.926 224.297 857.629c-.04.041-.06.052-.083.059a.118.118 0 0 1-.07 0c-.022-.007-.042-.018-.083-.059l-57.69-57.69c-.041-.041-.052-.06-.059-.084a.118.118 0 0 1 0-.069c.007-.023.018-.042.059-.083L454.073 512 166.371 224.297c-.041-.04-.052-.06-.059-.083a.118.118 0 0 1 0-.07c.007-.022.018-.042.059-.083l57.69-57.69c.041-.041.06-.052.084-.059a.118.118 0 0 1 .069 0c.023.007.042.018.083.059L512 454.073l287.703-287.702c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z"></path>
+              </svg>
+            ) : (
+              <svg
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                height="25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            )}
+          </MobWrap>
+          <Wrap2>
             <svg
               version="1.1"
               id="Layer_1"
@@ -121,7 +221,61 @@ const Header = () => {
                 data-sentry-source-file="RWDYLogoIcon.tsx"
               ></path>
             </svg>
-          </Wrap1>
+          </Wrap2>
+          <MobWrap>
+            <OptionWrap onClick={() => handleLogoOptions()}>
+              <Option>
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 59 49"
+                  x="0px"
+                  y="0px"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-sentry-element="svg"
+                  data-sentry-component="RWDYCrownIcon"
+                  data-sentry-source-file="RWDYCrownIcon.tsx"
+                >
+                  <g
+                    data-sentry-element="g"
+                    data-sentry-source-file="RWDYCrownIcon.tsx"
+                  >
+                    <g
+                      data-sentry-element="g"
+                      data-sentry-source-file="RWDYCrownIcon.tsx"
+                    >
+                      <path
+                        fill="#000"
+                        d="M57.1,10.3c0.2-0.6,0.4-1.2,0.3-1.8c0,0.1-0.1,0.1-0.1,0.2l0-0.2L40.2,23.2c-0.3-0.8-0.5-1.5-0.8-2.3      c-0.1-0.2-0.1-0.5-0.4-0.5c-0.3,0-0.1,0.4-0.4,0.6c-0.5-1.1-0.9-2.3-1.3-3.4c-0.3-0.8-0.4-1.9-1.1-2.4c-0.7-0.5-0.9-1-1.1-1.7      c-0.1-0.7-0.3-1.3-0.4-2c-0.2-1.2-0.7-2.3-1.5-3.1c-0.9-1-1.5-2.1-1.9-3.4c-0.4-1.1-0.7-2.3-1.1-3.4c-0.1-0.2-0.2-0.5-0.4-0.6      c0-0.1,0-0.2-0.1-0.4c-0.2,0.1-0.3,0.4-0.3,0.6c-0.1,0.4-0.2,0.8-0.3,1.1c-0.1,0.2,0,0.5-0.4,0.5c0,0-0.1,0.1-0.1,0.2      c-0.1,0.5-0.2,1-0.4,1.4c-0.7,1.3-0.7,2.8-1.1,4.3l-0.6,1.9c-0.1-0.1,0-0.2-0.1-0.3c-0.2,0.1-0.1,0.2-0.2,0.4      c-0.2,0.7-0.3,1.5-0.7,2.2c-0.1,0.1-0.1,0.3-0.3,0.3l-0.9,2.8c0,0,0-0.8-0.1-0.8c0,0.1-1.2,4.6-1.2,4.6l-0.9,1.9l0-0.1      c0,0.1-0.1,0.1-0.1,0.2c-0.2,0.3-0.2,0.8-0.2,1.3c0,0.2,0.1,0.2,0.3,0.2c0.1,0,0.2-0.1,0.3-0.1l0,0.1l1.2,1.2c0,0.1,0,0.1,0.1,0.2      c0,0,0,0,0-0.1l11.6,12.5l-13-11.1c0,0,0.1,0,0.1,0.1c-1.9-1.8-3.5-3.7-5.4-5.5c0,0-2.6-1.8-3.1-2c-0.3-0.2-0.6-0.3-0.8-0.4      L13,18.3v0c0,0,0,0,0,0L1.9,8.8C1.8,8.6,1.7,8.4,1.6,8.2c0.8,3.9,2.9,7.5,3.4,11.5c-0.2,0.1-0.2-0.3-0.4-0.1      c0.1,0.6,0.3,1.1,0.6,1.6c-0.2,0-0.3-0.3-0.5-0.2c0.1,0.3,0.1,0.6,0.2,0.9c0.6,1.8,1.4,3.5,2.1,5.2c1.2,3,2.6,5.9,2.8,9.1      c0.2,0.1,0.3-0.1,0.4-0.1c0.1-0.1,0.2-0.1,0.3-0.2l0,0l18.3,10.5c0,0,0,0,0,0c-0.2,0.2-0.4,0.4-0.6,0.5c-0.4,0.3-0.9,0.7-1.4,1      c0.1,0,0.2,0,0.2-0.1c0.7-0.4,1.5-0.7,2.2-1c0.5,0.4,0.9,0.8,1.6,1.1c0.2,0.1,0.5,0.2,0.7,0.4c0,0,0.1,0,0.1,0.1      c0.4,0.2,0.7,0.5,1.1,0.7c-0.5-0.5-1-0.9-1.1-1.7c0.2-0.1,0.3,0.3,0.5,0.2c0.2-0.4-0.3-0.9-0.1-1.2c0.1-0.2,0.1-0.3,0.1-0.5      l2.2-1.2c0.6-0.1,1.1-0.4,1.7-0.8c0.2-0.2,0.4-0.3,0.7-0.4c0,0-0.1,0-0.1,0c0.2-0.1,0.4-0.2,0.6-0.2c0.2,0,0.4-0.1,0.6-0.2      c0.1,0,0.2-0.2,0.4-0.2c0.3-0.3,0.6-0.4,0.7-0.5c0.1-0.2,0.3-0.3,0.4-0.4L49.9,36l0,0c0,0,0,0,0,0c0.2-0.4,0.9-0.8,0.7-1.2      c-0.4-0.6,0-0.9,0.2-1.3c0.3-0.8,0.6-1.5,1-2.5c-0.5,0.4-0.7,0.4-0.7,0.3l2-7.3c0.6-1.4,1.2-2.8,1.5-4.3c0.2-0.9,0.2-1.5,0.3-2.1      l1.1-4.2C56.4,12.2,56.8,11.2,57.1,10.3z M17.4,21.7c1.5,1.3,3,2.6,4.3,4l-5.9-5C16.4,20.9,16.9,21.3,17.4,21.7z"
+                        data-sentry-element="path"
+                        data-sentry-source-file="RWDYCrownIcon.tsx"
+                      ></path>
+                      <path
+                        fill="#000"
+                        d="M36.6,13.9c0.2,1.9,1.3,3.9,2.1,6C38.8,18.9,37.3,14.6,36.6,13.9z"
+                        data-sentry-element="path"
+                        data-sentry-source-file="RWDYCrownIcon.tsx"
+                      ></path>
+                      <path
+                        fill="#000"
+                        d="M36.6,43.7C36.6,43.6,36.6,43.6,36.6,43.7C36.6,43.6,36.6,43.6,36.6,43.7z"
+                        data-sentry-element="path"
+                        data-sentry-source-file="RWDYCrownIcon.tsx"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+              </Option>
+              {showLogoOptions && (
+                <CommonHeaderHover
+                  Options={LogoOptions}
+                  right="20px"
+                  width="13rem"
+                ></CommonHeaderHover>
+              )}
+            </OptionWrap>
+          </MobWrap>
           <Wrap1>
             <Option>CART</Option>
             <Option>LOGIN</Option>
@@ -179,6 +333,14 @@ const Header = () => {
             </OptionWrap>
           </Wrap1>
         </InsideWrap>
+        {showOptionsDropDown && (
+          <MobOptionsWrap>
+            <MobOptions>TOP WARE</MobOptions>
+            <MobOptions>BOTTOM WARE</MobOptions>
+            <StyledHr></StyledHr>
+            <MobOptions>LOGIN</MobOptions>
+          </MobOptionsWrap>
+        )}
       </Wrapper>
     </>
   );
