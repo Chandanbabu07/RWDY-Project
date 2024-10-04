@@ -26,6 +26,14 @@ const Wrapper = styled.div`
   @media (min-width: 1320px) {
     max-width: 1220px;
   }
+
+  @media (min-width: 1500px) {
+    max-width: 1370px;
+  }
+
+  /* @media (min-width: 1500px) {
+    max-width: 1540px;
+  } */
 `;
 
 const Video = styled.video`

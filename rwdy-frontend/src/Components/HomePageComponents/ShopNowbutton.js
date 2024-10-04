@@ -42,6 +42,18 @@ const Wrapper = styled.div`
     right: 93px;
     top: 630px;
   }
+
+  @media (min-width: 1500px) {
+    right: 100px;
+    top: 680px;
+    padding: 16px 22px;
+    font-size: 1.3rem;
+  }
+
+  /* @media (min-width: 1500px) {
+    right: 112px;
+    top: 743px;
+  } */
 `;
 const ShopNowbutton = ({ value, right, top, left }) => {
   return (

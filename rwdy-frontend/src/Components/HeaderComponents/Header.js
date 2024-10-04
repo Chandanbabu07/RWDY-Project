@@ -271,7 +271,7 @@ const Header = () => {
                 <CommonHeaderHover
                   Options={LogoOptions}
                   right="20px"
-                  width="13rem"
+                  width="14rem"
                 ></CommonHeaderHover>
               )}
             </OptionWrap>
@@ -327,7 +327,7 @@ const Header = () => {
                 <CommonHeaderHover
                   Options={LogoOptions}
                   right="20px"
-                  width="13rem"
+                  width="14rem"
                 ></CommonHeaderHover>
               )}
             </OptionWrap>

@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   background-color: rgb(232 231 228);
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.width ? props.width : "9rem")};
+  width: ${(props) => (props.width ? props.width : "10rem")};
   z-index: 50;
   position: absolute;
   box-sizing: border-box;

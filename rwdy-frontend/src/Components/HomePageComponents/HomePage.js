@@ -13,6 +13,16 @@ const Text = styled.img`
     width: 250px;
     margin-left: 150px;
   }
+
+  @media (min-width: 768px) {
+    width: 300px;
+    margin-left: 600px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 400px;
+    margin-left: 680px;
+  }
 `;
 
 const HomePage = () => {
