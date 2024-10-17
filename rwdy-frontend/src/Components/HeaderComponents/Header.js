@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CommonHeaderHover from "./CommonHeaderHover";
+import { useAuth0 } from "@auth0/auth0-react";
+import MyAccountDropdown from "./MyAccountDropdown";
 
 const Wrapper = styled.div`
   background-color: rgb(255 255 255);
@@ -100,6 +102,9 @@ const Header = () => {
   const [showBottomwareOptions, setShowBottomwareOptions] = useState(false);
   const [showLogoOptions, setShowLogoOptions] = useState(false);
   const [showOptionsDropDown, setShowOptionsDropDown] = useState(false);
+  const [showMyAccountDropdown, setShowMyAccountDropdown] = useState(false);
+
+  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
 
   const TopwareOptions = [
     "TEES",
@@ -144,6 +149,10 @@ const Header = () => {
 
   const handleHamburger = () => {
     setShowOptionsDropDown(!showOptionsDropDown);
+  };
+
+  const handleMyAccount = () => {
+    setShowMyAccountDropdown(!showMyAccountDropdown);
   };
 
   return (
@@ -278,7 +287,19 @@ const Header = () => {
           </MobWrap>
           <Wrap1>
             <Option>CART</Option>
-            <Option>LOGIN</Option>
+            {!isAuthenticated ? (
+              <Option onClick={() => loginWithRedirect()}>LOGIN</Option>
+            ) : (
+              <>
+                <Option>WISHLIST</Option>
+                <OptionWrap onClick={() => handleMyAccount()}>
+                  <Option>MY ACCOUNT</Option>
+                  {showMyAccountDropdown && (
+                    <MyAccountDropdown></MyAccountDropdown>
+                  )}
+                </OptionWrap>
+              </>
+            )}
             <OptionWrap onClick={() => handleLogoOptions()}>
               <Option>
                 <svg
@@ -338,7 +359,25 @@ const Header = () => {
             <MobOptions>TOP WARE</MobOptions>
             <MobOptions>BOTTOM WARE</MobOptions>
             <StyledHr></StyledHr>
-            <MobOptions>LOGIN</MobOptions>
+            {isAuthenticated ? (
+              <>
+                <MobOptions>My PROFILE</MobOptions>
+                <MobOptions>My ORDERS</MobOptions>
+                <MobOptions>My ADDRESS</MobOptions>
+                <MobOptions>WISHLIST</MobOptions>
+                <MobOptions
+                  onClick={() =>
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    })
+                  }
+                >
+                  LOGOUT
+                </MobOptions>
+              </>
+            ) : (
+              <MobOptions>LOGIN</MobOptions>
+            )}
           </MobOptionsWrap>
         )}
       </Wrapper>
