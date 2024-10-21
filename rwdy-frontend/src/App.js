@@ -5,6 +5,12 @@ import Header from "./Components/HeaderComponents/Header";
 import HomePage from "./Components/HomePageComponents/HomePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MyProfile from "./Components/MyAccountComponents/MyProfile";
+import styled from "styled-components";
+import MyAddress from "./Components/MyAccountComponents/MyAddress";
+
+const RouteWrapper = styled.div`
+  margin-top: 12rem;
+`;
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -13,12 +19,15 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage></HomePage>}></Route>
-          <Route path="/profile" element={<MyProfile></MyProfile>}></Route>
-        </Routes>
-      </Router>
+      <RouteWrapper>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage></HomePage>}></Route>
+            <Route path="/profile" element={<MyProfile></MyProfile>}></Route>
+            <Route path="/address" element={<MyAddress></MyAddress>}></Route>
+          </Routes>
+        </Router>
+      </RouteWrapper>
 
       <Footer></Footer>
     </div>

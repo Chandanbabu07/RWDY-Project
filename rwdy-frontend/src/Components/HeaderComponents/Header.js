@@ -104,7 +104,7 @@ const Header = () => {
   const [showOptionsDropDown, setShowOptionsDropDown] = useState(false);
   const [showMyAccountDropdown, setShowMyAccountDropdown] = useState(false);
 
-  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
 
   const TopwareOptions = [
     "TEES",
@@ -155,6 +155,13 @@ const Header = () => {
     setShowMyAccountDropdown(!showMyAccountDropdown);
   };
 
+  const handleMyProfile = () => {
+    window.location.href = "/profile ";
+  };
+
+  const handleMyAddress = () => {
+    window.location.href = "/address ";
+  };
   return (
     <>
       <Wrapper>
@@ -361,9 +368,13 @@ const Header = () => {
             <StyledHr></StyledHr>
             {isAuthenticated ? (
               <>
-                <MobOptions>My PROFILE</MobOptions>
+                <MobOptions onClick={() => handleMyProfile()}>
+                  My PROFILE
+                </MobOptions>
                 <MobOptions>My ORDERS</MobOptions>
-                <MobOptions>My ADDRESS</MobOptions>
+                <MobOptions onClick={() => handleMyAddress()}>
+                  My ADDRESS
+                </MobOptions>
                 <MobOptions>WISHLIST</MobOptions>
                 <MobOptions
                   onClick={() =>
@@ -376,7 +387,7 @@ const Header = () => {
                 </MobOptions>
               </>
             ) : (
-              <MobOptions>LOGIN</MobOptions>
+              <MobOptions onClick={() => loginWithRedirect()}>LOGIN</MobOptions>
             )}
           </MobOptionsWrap>
         )}

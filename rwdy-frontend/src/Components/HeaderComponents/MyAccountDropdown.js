@@ -76,6 +76,14 @@ const DetailBlock = styled.div`
 const MyAccountDropdown = () => {
   const { logout } = useAuth0();
 
+  const handleMyProfile = () => {
+    window.location.href = "/profile ";
+  };
+
+  const handleMyAddress = () => {
+    window.location.href = "/address ";
+  };
+
   return (
     <>
       <Wrapper>
@@ -92,9 +100,13 @@ const MyAccountDropdown = () => {
           </Details>
 
           <AuthDetails>
-            <DetailBlock>My Profile</DetailBlock>
+            <DetailBlock onClick={() => handleMyProfile()}>
+              My Profile
+            </DetailBlock>
             <DetailBlock>My Orders</DetailBlock>
-            <DetailBlock>My Address</DetailBlock>
+            <DetailBlock onClick={() => handleMyAddress()}>
+              My Address
+            </DetailBlock>
             <DetailBlock>Wishlist</DetailBlock>
             <DetailBlock
               onClick={() =>
